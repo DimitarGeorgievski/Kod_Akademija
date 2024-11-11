@@ -1,0 +1,78 @@
+*{
+    font-family: "roboto", sans-serif;
+}
+@font-face {
+    font-family: "Doto";
+    src: url(./Doto-Regular.ttf);
+}
+body{
+    font-size: 25px ;
+}
+html{
+    font-size: 25px;
+}
+h1{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+.doto-font{
+    font-family: "Doto", sans-serif;
+}
+.roboto{
+    font-family: "Roboto",sans-serif;
+    font-size: xx-large;
+    letter-spacing: 15px;
+    word-spacing: 0.2px;
+}
+.relative-size{
+    font-size: smaller;
+    text-transform: capitalize;
+    color: brown;
+    line-height: 2;
+}
+.container{
+    font-size: 40px;
+    font-weight: 300;
+}
+.paragraph{
+    font-size: 1.5em;
+    font-style: oblique 30deg;
+    text-transform: uppercase;
+}
+.rem-example{
+    font-size: 2rem;
+    font-weight: 998;
+    font-style: italic;
+    text-transform:capitalize;
+    text-decoration: underline red;
+    
+}
+.aligned{
+    text-align: right;
+}
+.vertical-align{
+    font-size: 1.3em;
+    display: inline-block;
+    vertical-align: baseline;
+}
+.paragraph:first-line{
+    text-decoration: underline dashed orange;
+
+}
+.color-red{
+    color: red;
+}
+.top-align{
+    vertical-align: top;
+}
+.middle-align{
+    vertical-align: middle;
+}
+.bottom-align{
+    vertical-align: bottom;
+    text-shadow: 9px 4px 5px rgba(255,12,12,0.85);
+}
+.middle-align::first-letter{
+    color: brown;
+    text-decoration: underline orange;
+}

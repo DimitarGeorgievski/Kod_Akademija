@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+}
+h1{
+    /* color: rgb(255,0,0); za crvena*/
+    /* color: rgb(0,255,0); za zelena*/
+    /* color: rgb(0,0,255); za plava  */
+    color: rgb(31, 156, 97);
+    background-color: black;
+}
+.hex-code{
+    color: #4C3139;
+    background-color: rgb(212, 22,50);
+}
+#named-color{
+    color:chocolate;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+.hsl-body{
+    background-color: hsl(100,67%,48%);
+}
