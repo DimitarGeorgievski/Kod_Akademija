@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.padding-example{
+    border: 2px solid blue;
+    background-color: lightblue;
+    padding: 20px;
+}
+.margin-example{
+    background-color: violet;
+    border: 2px solid blue;
+    margin: 20px;
+}
+.regular-box{
+    border: 20px solid purple;
+    width: 250px;
+    height: 250px;
+    padding: 20px;
+    margin: 40px;
+}
+.border-box{
+    border: 10px solid purple;
+    width: 250px;
+    height: 250px;
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+}
+.inline-example{
+    background-color: lightcoral ;
+    padding: 5px;
+    margin: 0 15px;
+    border: 2px solid black;
+}
+.overflow{
+    margin-top: 15px;
+    height: 50px;
+    width: 200px;
+    border: 1px solid black;
+    overflow: auto;
+}
