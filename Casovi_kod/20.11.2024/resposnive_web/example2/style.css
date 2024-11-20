@@ -1,0 +1,19 @@
+h1{
+    background-color: darkred;
+    color: #fff;
+}
+/* Mobile first */
+@media screen and (min-width: 480px){
+    h1{
+        background-color: aqua;
+        color: black;
+    }
+}
+/* desktop first */
+
+@media screen and (max-width:440px){
+    body{
+        background-color: darkcyan;
+        color: goldenrod;
+    }
+}
