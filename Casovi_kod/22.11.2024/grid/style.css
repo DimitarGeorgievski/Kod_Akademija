@@ -1,0 +1,24 @@
+.container{
+    display: grid;
+    height: 600px;
+    width: 600px;
+    background-color: cadetblue;
+    /* grid-template-rows: 1fr 2fr 1fr 2fr; */
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    gap: 20px;
+}
+.child{
+    border: 1px solid black;
+    /* margin: 20px; */
+}
+.container-inline{
+    display: inline-grid;
+}
+.container-repeat{
+    display: grid;
+    height: 300px;
+    width: 300px;
+    background-color: burlywood;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}

@@ -1,0 +1,30 @@
+.item1{
+    grid-area: header;
+}
+.item2{
+    grid-area: menu;
+}
+.item3{
+    grid-area: main;
+}
+.item4{
+    grid-area: aside;
+}
+.item5{
+    grid-area: footer;
+}
+.grid-container{
+    display: grid;
+    gap: 10px;
+    background-color: darkturquoise;
+    grid-template-areas: 
+    "header header header header header"
+    "menu main main aside aside"
+    "menu footer footer footer footer";    
+}
+.grid-container div{
+    background-color: cornflowerblue;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}

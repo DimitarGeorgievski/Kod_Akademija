@@ -1,0 +1,33 @@
+.container{
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5,1fr);
+    padding: 8px;
+    gap: 8px;
+}
+.btn.one{
+    /* so ova se praj od najlevo od kaj da pocni na primer od linija 1 i posle se broj do koja linija na primer za 3 polinja na desno
+    se praj 3 polinja,toe prostoro od prvata linija do 4tata linija toest to zafaka 3 polinja,za nadesno da spoj columns
+    za nadolu da spojva se row */
+    grid-column: 1/4;
+    grid-row: 1;
+}
+.btn.two{
+    grid-row: 1/ span 3;
+}
+.btn.three{
+    grid-column: 4;
+    grid-row: 3;
+}
+/* .btn.four{
+    grid-column: 5;
+    grid-row: 3;
+} */
+.btn.five{
+    grid-column: 1 / span 2;
+}
+.btn.six{
+    grid-column: 2;
+    grid-row: 5;
+}
