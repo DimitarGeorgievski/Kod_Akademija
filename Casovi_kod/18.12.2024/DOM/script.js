@@ -1,0 +1,44 @@
+// console.log(document);
+let myHeader = document.getElementById("myTitle");
+console.log(myHeader);
+console.log(myHeader.innerText);
+
+let paragraphs = document.getElementsByClassName("myParagraph");
+console.log(paragraphs);
+let secondParagraph = document.getElementsByClassName("second");
+console.log(secondParagraph);
+let paragraph = document.getElementsByTagName("p");
+console.log(paragraph);
+let divs = document.getElementsByTagName("div");
+console.log(divs);
+let paragraph1 = document.querySelectorAll("p");
+console.log(paragraph1);
+let text = document.querySelector(".second");
+console.log(text);
+let firstParagraph = document.querySelector("#myTitle");
+let sibling = firstParagraph.nextElementSibling;
+console.log(sibling);
+let prevSibling = sibling.previousElementSibling;
+console.log(prevSibling);
+let parent = prevSibling.parentElement;
+console.log(parent);
+let children = parent.children;
+console.log(children);
+let firstChild = parent.firstElementChild;
+console.log(firstChild);
+let lastChild = parent.lastElementChild;
+console.log(lastChild);
+
+let mainDiv = document.getElementById("main");
+let divTextContent = mainDiv.textContent;
+// console.log(divTextContent);
+let divInnerText = mainDiv.innerText;
+// console.log(divInnerText);
+let mainHeader = document.getElementById("myTitle");
+mainHeader.innerText = "Hello World";
+let divMain = document.getElementById("main");
+console.log(divMain.innerHTML);
+
+let divMainDiv = document.getElementById("main");
+divMainDiv.style.color = "red";
+divMainDiv.style.backgroundColor = "blue";

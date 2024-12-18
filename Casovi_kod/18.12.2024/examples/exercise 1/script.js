@@ -1,0 +1,12 @@
+let firstDiv = document.getElementById("first");
+let allPara = document.getElementsByTagName("p");
+let allDivs = document.getElementsByTagName("div");
+let lastDiv = allDivs.lastElementChild;
+let lastHeader = lastDiv.lastElementChild;
+let firstHeader = lastDiv.firstElementChild;
+let secondDiv = allDivs[1];
+let firstDivParagraph = firstDiv.lastElementChild;
+let secondParagraph = document.getElementById("second").innerHTML= firstDivParagraph;
+let textTag = secondDiv.lastElementChild;
+textTag += "text";
+console.log(textTag);
