@@ -1,0 +1,10 @@
+let firstDiv = $("div:first");
+console.log(firstDiv);
+let para = $('.paragraphInDiv:first');
+console.log(para);
+let mainHeader = $("h1:nth-child(1)");
+console.log(mainHeader);
+let primaryHeader = firstDiv.find("h3");
+console.log(primaryHeader);
+let btn = $("button");
+console.log(btn);
