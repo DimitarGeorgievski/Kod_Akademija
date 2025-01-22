@@ -32,8 +32,10 @@
     border-left: none;
 }
 .child6{
-    grid-column: 2;
-    grid-row: 2 / span 1;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4 ;
 }
 .child10{
 }

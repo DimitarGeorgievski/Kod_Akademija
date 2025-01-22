@@ -1,0 +1,60 @@
+:root{
+    --purple: #735DA5;
+    --lightPurple: #D3C5E5;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: var(--purple);
+}
+h1{
+    text-align: center;
+    margin-top: 5rem;
+}
+.container{
+    width: 30rem;
+    height: auto;
+    background: var(--lightPurple);
+    margin: 5rem auto;
+    display: flex;
+    flex-direction: column;
+}
+p{
+    text-align: center;
+    font-size:x-large;
+    font-weight: bold;
+}
+#selectGenre{
+    width: 7rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    color: var(--lightPurple);
+    background-color: var(--purple);
+    align-self: flex-end;
+    margin: 1rem 1rem;
+    z-index: 999;
+    cursor: pointer;
+}
+#joke{
+    text-align:left;
+    position: relative;
+    left: 2rem;
+    top: -3rem;
+    width: 18rem;
+    font-size: 20px;
+}
+#newJoke{
+    width: 70%;
+    height: 2rem;
+    color: var(--lightPurple);
+    background-color: var(--purple);
+    align-self: center;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
