@@ -1,5 +1,3 @@
-// variables
-
 //functions
 function showTopic(place){
     let text = document.getElementById(place);
