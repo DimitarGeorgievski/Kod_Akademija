@@ -22,7 +22,7 @@ function newJoke(){
     })
 }
 
-document.getElementById("selectGenre").addEventListener("change", function(event){
+document.getElementById("selectGenre").addEventListener("change", function(){
     showTopic("topic");
 });
 document.getElementById("newJoke").addEventListener("click",function(){
