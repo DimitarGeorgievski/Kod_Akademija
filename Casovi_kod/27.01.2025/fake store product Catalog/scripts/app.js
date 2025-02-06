@@ -8,6 +8,7 @@ const urls = {
     maxPages: 0,
     currentPage: 0,
   }
+  let categoryChosen = null;
   let pageSizes = [3, 6, 9];
   let currentProductSizes = 6;
   let cartProducst = [];
@@ -31,18 +32,21 @@ const urls = {
       .then((products) => {
           pagination.totalItems = products.length;
           pagination.maxPages = Math.ceil(pagination.totalItems / currentProductSizes);
-          console.log( Math.ceil(pagination.totalItems / currentProductSizes))
         let cutProductsFirstpage = products.splice(page*pageSize,pageSize);
         document.getElementById("pages").innerHTML = `${pagination.currentPage + 1}/ ${pagination.maxPages}`
             showProducts(cutProductsFirstpage);
       });
   }
    
-  function getProductsByCategory(category) {
+  function getProductsByCategory(page,pageSize,category) {
     fetch(`${urls.productsByCategory}${category}`)
       .then((res) => res.json())
       .then((products) => {
-        showProducts(products);
+        pagination.totalItems = products.length;
+        pagination.maxPages = Math.ceil(pagination.totalItems / currentProductSizes);
+        let cutProductsFirstpage = products.splice(page*pageSize,pageSize);
+        document.getElementById("pages").innerHTML = `${pagination.currentPage + 1}/ ${pagination.maxPages}`
+        showProducts(cutProductsFirstpage);
       });
   }
    
@@ -55,9 +59,6 @@ const urls = {
       });
     }
   }
-   
-  // getAllProducts();
-   
   function showCategoriesDropDown(data) {
     let btn = `<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Categories</button>`;
@@ -99,9 +100,10 @@ const urls = {
   dropdownPageSize();
   getAllCategories();
   document.getElementById("category-filter").addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON" && e.target.name === "category") {
+    if(e.target.tagName === "BUTTON" && e.target.name === "category"){
       categoryHeader.innerText = `Category: ${e.target.value}`;
-      getProductsByCategory(e.target.value);
+      categoryChosen = e.target.value;
+      getProductsByCategory(pagination.currentPage,currentProductSizes,e.target.value);
     }
   });
    
@@ -114,20 +116,39 @@ const urls = {
    
   document.getElementById("pageSize").addEventListener("change", (e) => {
     currentProductSizes = e.target.value;
-    getAllProducts(pagination.currentPage, currentProductSizes);
+    if(categoryChosen){
+      getProductsByCategory(pagination.currentPage,currentProductSizes,categoryChosen);
+    }
+    else{
+      getAllProducts(pagination.currentPage, currentProductSizes);
+    }
   });
   document.getElementById("nextBtn").addEventListener("click",function(){
-    pagination.currentPage += 1;
-    getAllProducts(pagination.currentPage, currentProductSizes)
-    // if(pagination.currentPage!== pagination.maxPages){
-    //     pagination.currentPage+=1;
-    // }
+    if(categoryChosen){
+      if(pagination.currentPage!== pagination.maxPages -1){
+        pagination.currentPage+=1;
+        getProductsByCategory(pagination.currentPage,currentProductSizes,categoryChosen);
+    }
+    }
+    else{
+      if(pagination.currentPage !== pagination.maxPages - 1){
+          pagination.currentPage += 1;
+          getAllProducts(pagination.currentPage, currentProductSizes);
+      }
+  }
   })
   document.getElementById("prevBtn").addEventListener("click",function(){
-    pagination.currentPage -= 1;
-    getAllProducts(pagination.currentPage, currentProductSizes)
-    // if(pagination.currentPage!==1){
-    //     pagination.currentPage-=1;
-    // }
+    if(categoryChosen){
+      if(pagination.currentPage>0){
+        pagination.currentPage -= 1;
+        getProductsByCategory(pagination.currentPage,currentProductSizes, categoryChosen);
+      }
+    }
+    else{
+      if(pagination.currentPage>0){
+        pagination.currentPage -= 1;
+        getAllProducts(pagination.currentPage, currentProductSizes);
+      }
+    }
   })
   
