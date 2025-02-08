@@ -103,6 +103,7 @@ const urls = {
     if(e.target.tagName === "BUTTON" && e.target.name === "category"){
       categoryHeader.innerText = `Category: ${e.target.value}`;
       categoryChosen = e.target.value;
+      pagination.currentPage = 0;
       getProductsByCategory(pagination.currentPage,currentProductSizes,e.target.value);
     }
   });
@@ -111,6 +112,7 @@ const urls = {
     filterDiv.style.display = "block";
     productsMainDiv.style.display = "block";
     categoryHeader.innerText = "All Products";
+    pagination.currentPage = 0;
     getAllProducts(pagination.currentPage, currentProductSizes);
   });
    
@@ -126,8 +128,15 @@ const urls = {
   document.getElementById("nextBtn").addEventListener("click",function(){
     if(categoryChosen){
       if(pagination.currentPage!== pagination.maxPages -1){
+        pagination.currentPage = 0;
         pagination.currentPage+=1;
         getProductsByCategory(pagination.currentPage,currentProductSizes,categoryChosen);
+    }
+    else{
+      if(pagination.currentPage!== pagination.maxPages -1){
+        pagination.currentPage+=1;
+        getAllProducts(pagination.currentPage, currentProductSizes);
+    }
     }
     }
     else{
