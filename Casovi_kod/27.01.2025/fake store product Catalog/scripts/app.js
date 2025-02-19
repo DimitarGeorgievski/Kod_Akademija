@@ -11,18 +11,22 @@ const urls = {
   let categoryChosen = null;
   let pageSizes = [3, 6, 9];
   let currentProductSizes = 6;
-  let cartProducst = [];
+  let cartProducts = [];
+  let totalPrice =0;
   let filterDiv = document.getElementById("filters");
   let productsMainDiv = document.getElementById("products");
   let categoryHeader = document.getElementById("category-title");
   let productsDiv = document.getElementById("show-products");
-   
+  let prevBtn = document.getElementById("prevBtn");
+  let nextBtn = document.getElementById("nextBtn");
+  let pages = document.getElementById("pageSize");
+  let categoryFilter = document.getElementById("category-filter");
+  
   // get all categories
   function getAllCategories() {
     fetch(urls.category)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         showCategoriesDropDown(data);
       });
   }
@@ -37,7 +41,7 @@ const urls = {
             showProducts(cutProductsFirstpage);
       });
   }
-   
+  
   function getProductsByCategory(page,pageSize,category) {
     fetch(`${urls.productsByCategory}${category}`)
       .then((res) => res.json())
@@ -52,10 +56,10 @@ const urls = {
    
   function addCartEventListeners() {
     let cartBtns = document.querySelectorAll(".cart");
-    // console.log(cartBtns);
-    for (let btn of cartBtns) {
+    for(let btn of cartBtns){
       btn.addEventListener("click", (e) => {
-        console.log(e.target.getAttribute("data-product-id"));
+      cartProducts = [...new Set([...cartProducts, e.target.getAttribute("data-product-id")])];
+      console.log(cartProducts);
       });
     }
   }
@@ -97,9 +101,43 @@ const urls = {
     }
     content.innerHTML = html;
   }
+  function cartItems(ids){
+    fetch(urls.allProducts)
+    .then((res) => res.json())
+    .then(data => {
+      let filteredProducts = data.filter(product => ids.includes(product.id.toString()));
+      console.log(filteredProducts);
+      let html = "";
+    for(let product of filteredProducts){
+      let card = `<div class="card mb-3" style="max-width: 540px;">
+                  <div class="row g-0">
+                  <div class="col-md-4">
+                  <img src="${product.image}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.title}</h5>
+                    <p class="card-text">Price: ${product.price}$</p>
+                    <button class="btn btn-primary cart">Buy</button>
+                    <button class="btn btn-secondary cart remove-cart data-product-id='${product.id} ">Remove Item</button>
+                  </div>
+                </div>
+                </div>
+                </div>`;
+                html += card;           
+  }
+  for(let product of filteredProducts){
+    totalPrice += Number(product.price);
+  }
+  console.log(totalPrice);
+  document.getElementById("pages").innerHTML = `Total Price: ${totalPrice}$`;
+  productsDiv.innerHTML = html;
+})
+  }
+
   dropdownPageSize();
   getAllCategories();
-  document.getElementById("category-filter").addEventListener("click", (e) => {
+  categoryFilter.addEventListener("click", (e) => {
     if(e.target.tagName === "BUTTON" && e.target.name === "category"){
       categoryHeader.innerText = `Category: ${e.target.value}`;
       categoryChosen = e.target.value;
@@ -109,14 +147,20 @@ const urls = {
   });
    
   document.getElementById("products-nav").addEventListener("click", () => {
+    categoryChosen = null;
     filterDiv.style.display = "block";
     productsMainDiv.style.display = "block";
     categoryHeader.innerText = "All Products";
+    prevBtn.style.display = "block";
+    nextBtn.style.display = "block";
+    pages.style.display = "block";
+    categoryFilter.style.display = "block"
+    document.getElementById("pages").style.display = "block";
     pagination.currentPage = 0;
     getAllProducts(pagination.currentPage, currentProductSizes);
   });
    
-  document.getElementById("pageSize").addEventListener("change", (e) => {
+  pages.addEventListener("change", (e) => {
     currentProductSizes = e.target.value;
     if(categoryChosen){
       getProductsByCategory(pagination.currentPage,currentProductSizes,categoryChosen);
@@ -125,7 +169,7 @@ const urls = {
       getAllProducts(pagination.currentPage, currentProductSizes);
     }
   });
-  document.getElementById("nextBtn").addEventListener("click",function(){
+  nextBtn.addEventListener("click",function(){
     if(categoryChosen){
       if(pagination.currentPage!== pagination.maxPages -1){
         pagination.currentPage = 0;
@@ -146,7 +190,7 @@ const urls = {
       }
   }
   })
-  document.getElementById("prevBtn").addEventListener("click",function(){
+  prevBtn.addEventListener("click",function(){
     if(categoryChosen){
       if(pagination.currentPage>0){
         pagination.currentPage -= 1;
@@ -160,4 +204,11 @@ const urls = {
       }
     }
   })
-  
+  document.getElementById("cart").addEventListener("click",function(){
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+    pages.style.display = "none";
+    categoryFilter.style.display = "none";
+    categoryHeader.innerHTML = "Cart";
+    cartItems(cartProducts);
+  });
