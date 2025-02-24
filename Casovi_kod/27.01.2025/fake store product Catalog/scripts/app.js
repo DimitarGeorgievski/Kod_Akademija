@@ -21,6 +21,7 @@ const urls = {
   let nextBtn = document.getElementById("nextBtn");
   let pages = document.getElementById("pageSize");
   let categoryFilter = document.getElementById("category-filter");
+  let buyBtn = document.getElementById("buyCartBtn");
   
   // get all categories
   function getAllCategories() {
@@ -107,6 +108,7 @@ const urls = {
     .then(data => {
       let filteredProducts = data.filter(product => ids.includes(product.id.toString()));
       console.log(filteredProducts);
+      totalPrice = 0;
       let html = "";
     for(let product of filteredProducts){
       let card = `<div class="card mb-3" style="max-width: 540px;">
@@ -118,19 +120,16 @@ const urls = {
                   <div class="card-body">
                     <h5 class="card-title">${product.title}</h5>
                     <p class="card-text">Price: ${product.price}$</p>
-                    <button class="btn btn-primary cart">Buy</button>
-                    <button class="btn btn-secondary cart remove-cart data-product-id='${product.id} ">Remove Item</button>
+                    <button name="remove-cart" class="btn btn-secondary cart" data-product-id="${product.id}">Remove Item</button>
                   </div>
                 </div>
                 </div>
                 </div>`;
-                html += card;           
+                html += card;
+                totalPrice += Number(product.price);
   }
-  for(let product of filteredProducts){
-    totalPrice += Number(product.price);
-  }
-  console.log(totalPrice);
   document.getElementById("pages").innerHTML = `Total Price: ${totalPrice}$`;
+  document.getElementById("buyCartBtn").style.display = "inline-block";
   productsDiv.innerHTML = html;
 })
   }
@@ -157,6 +156,7 @@ const urls = {
     categoryFilter.style.display = "block"
     document.getElementById("pages").style.display = "block";
     pagination.currentPage = 0;
+    buyBtn.style.display = "none"
     getAllProducts(pagination.currentPage, currentProductSizes);
   });
    
@@ -212,3 +212,23 @@ const urls = {
     categoryHeader.innerHTML = "Cart";
     cartItems(cartProducts);
   });
+  productsDiv.addEventListener("click", function(e){
+    if(e.target.tagName === "BUTTON" && e.target.name === "remove-cart"){
+      let productId = e.target.getAttribute("data-product-id");
+      let index = cartProducts.indexOf(productId);
+      cartProducts.splice(index, 1);
+      let card = e.target.closest(".card");
+      card.remove();
+      cartItems(cartProducts);
+    }
+  })
+  buyBtn.addEventListener("click",function(){
+    cartProducts = [];
+    prevBtn.style.display = "block";
+    nextBtn.style.display = "block";
+    pages.style.display = "block";
+    categoryFilter.style.display = "block";
+    buyBtn.style.display = "none";
+    categoryHeader.innerHTML = "Products";
+    getAllProducts(pagination.currentPage, currentProductSizes);
+  })
