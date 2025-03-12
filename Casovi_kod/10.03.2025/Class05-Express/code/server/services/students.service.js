@@ -66,7 +66,32 @@ const deleteStudent = (studentId) => {
   if (student.length === updatedStudents.length) {
     throw new Error("student to delete not found!");
   }
-  return updatedStudents;
+  saveStudentData(updatedStudents);
+};
+// 6. update student
+const updateStudent = (studentId, studentUpdateData) => {
+  const students = getStudents();
+  const foundStudentIndex = students.findIndex(
+    (student) => student.id === studentId
+  );
+  console.log(foundStudentIndex);
+  if (foundStudentIndex < 0) throw new Error("Student not found");
+
+  const updatedStudentData = {
+    ...students[foundStudentIndex],
+    ...studentUpdateData, // na mestoto na founstudentIndex da go zapisi updatejtiranio student
+  };
+  console.log(updatedStudentData);
+  students[foundStudentIndex] = updatedStudentData;
+  console.log(students);
+  saveStudentData(students);
+  return updatedStudentData;
 };
 
-export { getStudents, getStudentsById, addStudent, deleteStudent };
+export {
+  getStudents,
+  getStudentsById,
+  addStudent,
+  deleteStudent,
+  updateStudent,
+};
