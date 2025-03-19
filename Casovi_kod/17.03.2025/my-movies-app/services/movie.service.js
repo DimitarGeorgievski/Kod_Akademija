@@ -7,4 +7,16 @@ export default class MovieService{
     getById(id){
         return getDB().collection("my-movies").findOne({_id: new ObjectId(id)});
     }
+    async create(body){
+        const result = await getDB().collection("my-movies").insertOne(body);
+        return result.insertedId;
+    }
+    async update(id,body){
+        const result = await getDB().collection("my-movies").updateOne({_id: new ObjectId(id)}, {$set: body});
+        return result.modifiedCount > 0;
+    }
+    async delete(id){
+        const result = await getDB().collection("my-movies").deleteOne({_id: new ObjectId(id)});
+        return result.deletedCount > 0
+    }
 }
