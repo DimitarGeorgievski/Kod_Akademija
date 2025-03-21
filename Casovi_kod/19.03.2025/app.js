@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv"; // environment za da gi vcitame variblite
 import { connectDB} from "./config/db.js"
-import router from "./routes/movies.routes.js";
+import movieRouter from "./routes/movies.routes.js";
+import userRouter from "./routes/user.routes.js";
 
 //Load environment variables
 dotenv.config();
@@ -12,7 +13,8 @@ const PORT = 3000; // nemora sekogas da se napisi hostot bidejki local host e se
 app.use(express.json()) // za da vraka sekogas json
 
 //Routes
-app.use("/api/movies", router);
+app.use("/api/movies", movieRouter);
+app.use("/api/users", userRouter);
 
 app.get("/health", (req,res) => { // na realni proekti najcesto ova se praj za da se proveri dali servero dobro raboti
     res.json({status: "OK"});

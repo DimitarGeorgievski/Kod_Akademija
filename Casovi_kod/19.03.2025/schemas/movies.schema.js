@@ -9,7 +9,7 @@ const movieSchema = new Schema({
     required: [true, "Name is required"],
     unique: true,
   },
-  genres: {
+  genre: {
     type: [String],
     enum: genres,
     required: [true, "Genre is required"],
