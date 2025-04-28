@@ -174,25 +174,40 @@ console.log(Dimitar);
 // Classes
 
 class Laptop implements Product {
-    serialNumber = "L1232141241";
-    producionYear = 2023;
-    
-    constructor(
-        public title: string,
-        public stock: number,
-        public description: string,
-        public category: string,
-        public price: number,
-        public rating: number,
-        public countryOfOrigin: string    
-    ){
+  readonly productionYear = 2023;
+  private serialNum = "L21312412312";
 
-    }
-    printInfo() {
-        console.log(`The laptop was made in ${this.countryOfOrigin}, has a rating ${this.rating} and has a stock ${this.stock}`)
-    }
+  constructor(
+    public title: string,
+    public stock: number,
+    public description: string,
+    public category: string,
+    public price: number,
+    public rating: number,
+    public countryOfOrigin: string
+  ) {}
+
+  printInfo() {
+    console.log(
+      `The laptop was made in ${this.countryOfOrigin}, has a rating of ${this.rating} and has a stock of: ${this.stock}`
+    );
+  }
+
+  getSerialNum(): string {
+    return this.serialNum;
+  }
+  updateSerialNum(newSerialNum: string){
+    if(newSerialNum[0] !== 'L') return;
+    this.serialNum = newSerialNum;
+  }
 }
+
 
 const hpLaptop = new Laptop("Legion", 12300, "Gaming Laptop", "Portable Computers", 1200, 8.4, "China");
 
 console.log(hpLaptop);
+
+hpLaptop.updateSerialNum("A31241242141");
+console.log("After update", hpLaptop.getSerialNum());
+
+console.log("Reading the readonly property" , hpLaptop.productionYear);
