@@ -1,0 +1,20 @@
+[
+  {
+    "id": "f388c2f7-c5aa-49d5-8612-3524f79570de",
+    "title": "Mouse",
+    "stock": 50,
+    "price": 1000,
+    "tags": [
+      "Netherlands",
+      "Plastic",
+      "Plaza"
+    ],
+    "details": {
+      "description": "a very fancy product from china",
+      "productionYear": 2023,
+      "madeIn": "China",
+      "brand": "random Chinese Brand",
+      "warrantyInYears": 8
+    }
+  }
+]
