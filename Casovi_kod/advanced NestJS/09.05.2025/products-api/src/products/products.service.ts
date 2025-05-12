@@ -7,23 +7,39 @@ import { UpdateProductDto } from './dtos/update-product.dto';
 
 @Injectable()
 export class ProductsService {
-    constructor(@InjectRepository(Product) private productsRepo: Repository<Product>){}
-    async findAll(){
-        return this.productsRepo.find();
-    }
-    async getById(id: number){
-        const foundProduct = await this.productsRepo.findOneBy({id})
-        if(!foundProduct) throw new NotFoundException("Product not found");
-    }
-    async create( body: CreateProductDto){
-        return this.productsRepo.save(body);
-    }
-    // async delete(id:number){
-    //     const foundProduct = await this.getById(id);
-    //     await this.productsRepo.remove(foundProduct);
-    // }
-    // async updateProduct(id: number, data: UpdateProductDto){
-    //     const foundProduct = await this.getById(id);
-    //     Object.assign(foundProduct, data);
-    // }
+  constructor(
+    @InjectRepository(Product) private productsRepo: Repository<Product>,
+  ) {}
+
+  async findAll() {
+    return this.productsRepo.find();
+  }
+
+  async findById(id: number) {
+    const foundProduct = await this.productsRepo.findOneBy({ id });
+
+    if (!foundProduct) throw new NotFoundException('product not found');
+
+    return foundProduct;
+  }
+
+  async create(createData: CreateProductDto) {
+    return this.productsRepo.save(createData);
+  }
+
+  async updateProduct(id: number, updateData: UpdateProductDto) {
+    const foundProduct = await this.findById(id);
+
+    Object.assign(foundProduct, updateData);
+
+    console.log(foundProduct);
+
+    await this.productsRepo.save(foundProduct);
+  }
+
+  async delete(id: number) {
+    const foundProduct = await this.findById(id);
+
+    await this.productsRepo.remove(foundProduct);
+  }
 }

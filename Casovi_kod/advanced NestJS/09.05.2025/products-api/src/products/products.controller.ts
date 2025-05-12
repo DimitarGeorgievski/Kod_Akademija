@@ -16,12 +16,12 @@ export class ProductsController {
     @Get(":id")
     getById(@Param("id") id:string){
         if(Number.isNaN(Number(id))) throw new BadRequestException("invalid id only numbers allowed");
-        return this.productsService.getById(Number(id));
+        return this.productsService.findById(Number(id));
     }
-    // @HttpCode(204)
-    // @Delete(":id")
-    // delete(@Param("id") id: string){
-    //     if(Number.isNaN(Number(id))) throw new BadRequestException("invalid id only numbers allowed");
-    //     return this.productsService.delete(Number(id));
-    // }
+    @HttpCode(204)
+    @Delete(":id")
+    delete(@Param("id") id: string){
+        if(Number.isNaN(Number(id))) throw new BadRequestException("invalid id only numbers allowed");
+        return this.productsService.delete(Number(id));
+    }
 }
