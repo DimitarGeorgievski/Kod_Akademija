@@ -19,6 +19,10 @@ export class UsersController {
   findDetails(@Param("id") id:string){
     return this.usersService.findUserDetails(id);
   }
+  @Get(":id/products")
+  findProducts(@Param("id") id:string){
+    return this.usersService.findUserProducts(id);
+  }
   @Post()
   create(@Body() createData: CreateUserDto){
     return this.usersService.create(createData);

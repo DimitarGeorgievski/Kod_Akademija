@@ -14,6 +14,7 @@ export class OrdersService {
       user: {
         id: createOrderDto.userId,
       },
+      products: createOrderDto.products.map(id => ({ id })),
     });
   }
 

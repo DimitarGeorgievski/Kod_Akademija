@@ -2,7 +2,6 @@ import { BadRequestException, Injectable, InternalServerErrorException, NotFound
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { CreateProductDto } from 'src/products/dtos/create-product.dto';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 
@@ -29,6 +28,18 @@ export class UsersService {
         orders: true,
       }
     });
+    if(!foundUser) throw new NotFoundException("User not found");
+    return foundUser;
+  }
+  async findUserProducts(id:string){
+    const foundUser = await this.userRepo.findOne({
+      where: {id},
+      relations: {
+        orders: {
+          products: true,
+        },
+      }
+    })
     if(!foundUser) throw new NotFoundException("User not found");
     return foundUser;
   }

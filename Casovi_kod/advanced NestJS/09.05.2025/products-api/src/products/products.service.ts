@@ -15,7 +15,7 @@ export class ProductsService {
     return this.productsRepo.find();
   }
 
-  async findById(id: number) {
+  async findById(id: string) {
     const foundProduct = await this.productsRepo.findOneBy({ id });
 
     if (!foundProduct) throw new NotFoundException('product not found');
@@ -27,7 +27,7 @@ export class ProductsService {
     return this.productsRepo.save(createData);
   }
 
-  async updateProduct(id: number, updateData: UpdateProductDto) {
+  async updateProduct(id: string, updateData: UpdateProductDto) {
     const foundProduct = await this.findById(id);
 
     Object.assign(foundProduct, updateData);
@@ -37,7 +37,7 @@ export class ProductsService {
     await this.productsRepo.save(foundProduct);
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const foundProduct = await this.findById(id);
 
     await this.productsRepo.remove(foundProduct);

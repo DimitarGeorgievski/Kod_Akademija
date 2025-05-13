@@ -1,4 +1,4 @@
-import { IsDateString, IsNumber, IsString, Min } from 'class-validator';
+import { IsArray, IsDateString, IsNumber, isString, IsString, Min } from 'class-validator';
 
 export class CreateOrderDto {
   @IsNumber()
@@ -8,4 +8,7 @@ export class CreateOrderDto {
   date: string;
   @IsString()
   userId: string;
+  @IsArray()
+  @IsString({ each: true})
+  products: string[];
 }
