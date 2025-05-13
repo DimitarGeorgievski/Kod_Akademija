@@ -14,5 +14,5 @@ export class Order {
     user: User;
     @ManyToMany(() => Product)
     @JoinTable()
-    products: Product[]
+    products: Product[] // ne mi bese jasno kako raboti @RelationId i dali treba da go koristam, pa ako mozi da se objasni na chas ili vo komentar
 }
