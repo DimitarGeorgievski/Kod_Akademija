@@ -18,6 +18,10 @@ export class ProductsController {
         if(Number.isNaN(Number(id))) throw new BadRequestException("invalid id only numbers allowed");
         return this.productsService.findById(id);
     }
+    @Get("/:id/orders")
+    findProductOrders(@Param(":id") id:string){
+        return this.productsService.findOrders(id);
+    }
     @HttpCode(204)
     @Delete(":id")
     delete(@Param("id") id: string){

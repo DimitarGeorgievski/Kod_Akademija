@@ -12,7 +12,9 @@ export class ProductsService {
   ) {}
 
   async findAll() {
-    return this.productsRepo.find();
+    return this.productsRepo.find({
+      // loadRelationIds: true,
+    });
   }
 
   async findById(id: string) {
@@ -22,7 +24,16 @@ export class ProductsService {
 
     return foundProduct;
   }
-
+  async findOrders(id: string) {
+    const foundProduct = await this.productsRepo.findOne({
+      where: { id },
+      relations: {
+        orders: true,
+      },
+    });
+    if(!foundProduct) throw new NotFoundException("No orders with this product")
+    return foundProduct;
+  }
   async create(createData: CreateProductDto) {
     return this.productsRepo.save(createData);
   }

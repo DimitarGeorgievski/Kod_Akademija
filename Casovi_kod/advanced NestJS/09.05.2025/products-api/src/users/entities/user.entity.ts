@@ -7,15 +7,21 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column({
-     unique: true
+     unique: true,
+     name: "emai;"
   })
   email: string;
-  @Column()
+      @Column({
+        name:"first_name"
+    })
   firstName: string;
-  @Column()
+      @Column({
+        name:"last_name"
+    })
   lastName: string;
   @Column({ 
-    type: 'int'
+    type: 'int',
+    name: "age"
    })
   age: number;
   //User Details

@@ -1,20 +1,33 @@
 import { Order } from 'src/orders/entities/order.entity';
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Product {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column()
+  @Column({
+    name: "title"
+  })
   title: string;
 
-  @Column()
+  @Column({
+    name: "stock"
+  })
   stock: number;
 
-  @Column()
+  @Column({
+    name: "price"
+  })
   price: number;
 
-  @Column()
+  @Column({
+    name: "is_available"
+  })
   isAvailable: boolean;
   @ManyToMany(() => Order, order => order.products)
   orders: Order[];
