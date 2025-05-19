@@ -1,0 +1,25 @@
+GET http://localhost:3000/
+
+###
+
+GET http://localhost:3000/api/products
+
+###
+
+GET http://localhost:3000/api/products/f0566da6-a79a-46a0-8f87-98659056a5ec
+
+###
+
+POST http://localhost:3000/api/product
+Content-Type: application/json
+
+### Register
+POST http://localhost:3000/api/auth/register
+Content-Type: : application/json
+
+{
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "email": "test@gmail.com",
+    "password": "pasvord123"
+}
