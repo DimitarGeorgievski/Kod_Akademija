@@ -1,3 +1,5 @@
+import { Exclude } from 'class-transformer';
+import { RoleType } from 'src/auth/roles.model';
 import { Order } from 'src/orders/entities/order.entity';
 import { UserAddress } from 'src/user-address/entities/user-address.entity';
 import {
@@ -18,10 +20,13 @@ export class User {
     name: 'email',
   })
   email: string;
-
+  @Exclude()
   @Column()
   password: string;
-
+  @Column({
+    default: RoleType.USER
+  })
+  role: RoleType;
   @Column({
     name: 'first_name',
   })
@@ -34,6 +39,7 @@ export class User {
 
   @Column({ type: 'int' })
   age: number;
+  @Exclude()
   @Column("text",{
     array: true,
     default: [],

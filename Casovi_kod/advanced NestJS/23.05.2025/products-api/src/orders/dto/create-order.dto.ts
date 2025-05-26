@@ -2,9 +2,7 @@ import {
   IsArray,
   IsDateString,
   IsInt,
-  IsNegative,
   IsNumber,
-  IsString,
   Min,
 } from 'class-validator';
 
@@ -15,9 +13,6 @@ export class CreateOrderDto {
 
   @IsDateString()
   date: string;
-
-  @IsString()
-  user: string;
 
   @IsArray()
   @IsInt({ each: true })

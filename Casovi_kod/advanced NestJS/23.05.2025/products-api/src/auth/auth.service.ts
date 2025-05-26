@@ -10,7 +10,6 @@ import { hash, compare } from 'bcryptjs';
 import { CredentialsDto } from './dtos/credentials.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { ref } from 'process';
 
 @Injectable()
 export class AuthService {

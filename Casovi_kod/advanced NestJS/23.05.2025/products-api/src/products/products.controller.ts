@@ -8,21 +8,26 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { RoleType } from 'src/auth/roles.model';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { ProductFiltersDto } from './dtos/product-filter.dto';
 
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard,RolesGuard)
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query() productFilters: ProductFiltersDto) {
+    return this.productsService.findAll(productFilters);
   }
 
   @Get(':id')
@@ -37,7 +42,7 @@ export class ProductsController {
   findProductOrders(@Param('id') id: string) {
     return this.productsService.findProductOrders(Number(id));
   }
-
+  @Roles(RoleType.ADMIN)
   @Post()
   create(@Body() createData: CreateProductDto) {
     return this.productsService.create(createData);

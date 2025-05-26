@@ -2,7 +2,6 @@ import { Order } from 'src/orders/entities/order.entity';
 import {
   Column,
   Entity,
-  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
