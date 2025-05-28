@@ -1,10 +1,4 @@
-import {
-  IsArray,
-  IsDateString,
-  IsInt,
-  IsNumber,
-  Min,
-} from 'class-validator';
+import { IsArray, IsDateString, IsInt, IsNumber, Min } from 'class-validator';
 
 export class CreateOrderDto {
   @IsNumber()

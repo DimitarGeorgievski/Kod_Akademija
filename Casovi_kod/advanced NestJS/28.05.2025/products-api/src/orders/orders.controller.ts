@@ -18,7 +18,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
 
 @UseGuards(AuthGuard)
-@UseInterceptors(ClassSerializerInterceptor)
+// @UseInterceptors(ClassSerializerInterceptor)
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}

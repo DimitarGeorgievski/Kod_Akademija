@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "55301304-d631-45bd-aa81-126cd980597b",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43062782"
+	},
+	"item": [
+		{
+			"name": "Create order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalAmount\": {{$randomInt}},\r\n    \"date\": \"2025-01-01\",\r\n    \"userId\": \"a6008bc1-2c8a-428a-a699-c214030d23dc\",\r\n    \"products\": [\"4a3ad546-6be2-4315-87e0-162adfba369f\", \"65d3c85e-973f-4684-98d3-2509aa19d2a7\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Link}}/orders",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"{{$randomProduct}}\",\r\n    \"stock\": {{$randomInt}},\r\n    \"isAvailable\": true,\r\n    \"price\": {{$randomInt}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Link}}/products",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/users",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/products",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get address by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/user-address/:id",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"user-address",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "cddad9b0-8754-4568-96ca-a249c9fe813b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/users/:id",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "cddad9b0-8754-4568-96ca-a249c9fe813b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/users/:id/details",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users",
+						":id",
+						"details"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "a6008bc1-2c8a-428a-a699-c214030d23dc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/users/:id/products",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users",
+						":id",
+						"products"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "a6008bc1-2c8a-428a-a699-c214030d23dc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Link}}/users/:id",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "406e518b-e5ff-4128-a53c-c595836e0ea4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"age\": 18\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Link}}/users",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Adress",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"{{$randomCountry}}\",\r\n    \"city\": \"{{$randomCity}}\",\r\n    \"street\": \"{{$randomStreetName}}\",\r\n    \"zipCode\": \"70001\",\r\n    \"user\": \"a6008bc1-2c8a-428a-a699-c214030d23dc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Link}}/user-address",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"user-address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"age\": 18\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Link}}/users/:id",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4830c5cc-923e-418e-83df-c796ac9bcdd8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Addressess",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"{{$randomCountry}}\",\r\n    \"city\": \"{{$randomCity}}\",\r\n    \"street\": \"{{$randomStreetAddress}}\",\r\n    \"zipCode\": \"12345\",\r\n    \"user\": \"cddad9b0-8754-4568-96ca-a249c9fe813b\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Link}}/user-address",
+					"host": [
+						"{{Link}}"
+					],
+					"path": [
+						"user-address"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
