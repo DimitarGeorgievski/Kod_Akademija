@@ -1,0 +1,18 @@
+### PART 1
+
+1. startovanje na nest proekt
+2. instaliranje na paketi
+3. setiranje na databaza
+4. praenje na database module
+5. stavanje na global pipe vo main.ts
+
+### PART 2
+
+1. praenje na movies entity i segde kaj so ima 2 zbora toest name_lastname treba name da mu se dodaj, i posle da se dodaj forfeature vo movie module
+2. praenje na director entity i soptsvenik na one to many e movies i se stava joinColumn vo movies entity i vo join column treba name za da znaj
+3. i taka za site edno po edno za site tabeli
+4. i za many to many treba da ima i inverseJoinColumn i JoinColumn kako vo genres i vo movies
+
+### PART 3
+
+1. ako ima isto taka poke koloni vo many to many mora da se napraj edna tabela so 2 vrski toest one to one i many to one za da mozi da se izmapirat durigte koloni
