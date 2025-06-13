@@ -6,12 +6,10 @@ function Counter() {
   const [count, setCount] = useState(0);
   const add = () => {
     if(count >= 10) return
-    // setCount(count + 1)
     setCount((prev) => prev + 1);
   };
   const remove = () => {
     if(count <= 0) return
-    // setCount(count -1)
     setCount((prev) => prev - 1);
   };
 
