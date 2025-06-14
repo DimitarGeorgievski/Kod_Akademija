@@ -16,14 +16,11 @@ export class MoviesService {
   findAll() {
     const queryBuilder = this.moviesRepo
       .createQueryBuilder('movies')
-      .select(['movies.id', 'movies.title', 'movies.budget'])
-      .offset(5)
-      .limit(5);
-
+      .select(['movies.id', 'movies.title', 'movies.budget']);
     return queryBuilder.getMany();
   }
 
-  async findOne(id: number) {
+  async findOne(id: number) { // for fix
     const foundMovie = await this.moviesRepo.findOne({
       where: { id },
       relations: {
@@ -67,8 +64,7 @@ export class MoviesService {
       .groupBy('genre.id')
       .orderBy('genre.id')
       .getRawMany();
-
-    return response.map((r) => ({ ...r, movieCount: Number(r.movieCount) }));
+    return response.map((r) => ({...r, movieCount: Number(r.movieCount)}));
   }
 
   update(id: number, updateMovieDto: UpdateMovieDto) {
