@@ -8,6 +8,7 @@ import { Movie } from './entities/movie.entity';
 @Injectable()
 export class MoviesService {
   constructor(@InjectRepository(Movie) private moviesRepo: Repository<Movie>) {}
+
   create(createMovieDto: CreateMovieDto) {
     return 'This action adds a new movie';
   }
@@ -26,31 +27,46 @@ export class MoviesService {
         director: true,
         genres: true,
         castMember: {
-          actors: true
-        }
+          actors: true,
+        },
       },
     });
-    const builderQuery = this.moviesRepo
-      .createQueryBuilder('movie')
-      .leftJoinAndSelect('movie.genres', 'genres')
-      .leftJoinAndSelect('movie.director', 'director')
-      .where('movie.id = :movieId', { movieId: id })
-      .getOne();
-    if (!foundMovie) throw new NotFoundException('movie not found');
+
+    // const builderQuery = this.moviesRepo
+    //   .createQueryBuilder('movie')
+    //   .leftJoinAndSelect('movie.genres', 'genre')
+    //   .leftJoinAndSelect('movie.director', 'director')
+    //   .where('movie.id = :movieId', { movieId: id })
+    //   .getOne();
+
+    // const rawQuery = this.moviesRepo.query(
+    //   `
+    //     select * from movies m
+    //     left join movie_genres mg on mg.movie_id = m.movie_id 
+    //     left join genres g on mg.genre_id  = g.genre_id 
+    //     left join directors d on d.director_id = m.director_id 
+    //     where m.movie_id = $1;
+    //   `,
+    //   [id],
+    // );
+    if (!foundMovie) throw new NotFoundException('Movie not found');
+
     return foundMovie;
   }
+
   async getMovieCountByGenre() {
     const response = await this.moviesRepo
       .createQueryBuilder('movie')
-      .leftJoin('movie.genres', 'genres')
-      .select("genres.id", "id")
-      .addSelect("genres.name", "name")
-      .addSelect("COUNT(movie.id)", "movieCount")
-      .groupBy("genres.id")
-      .orderBy("genres.id")
+      .leftJoin('movie.genres', 'genre')
+      .select('genre.id', 'id')
+      .addSelect('genre.name', 'name')
+      .addSelect('COUNT(movie.id)', 'movieCount')
+      .groupBy('genre.id')
+      .orderBy('genre.id')
       .getRawMany();
     return response.map((r) => ({...r, movieCount: Number(r.movieCount)}));
   }
+
   update(id: number, updateMovieDto: UpdateMovieDto) {
     return `This action updates a #${id} movie`;
   }
