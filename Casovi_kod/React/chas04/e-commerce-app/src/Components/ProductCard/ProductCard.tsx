@@ -5,10 +5,10 @@ import "./ProductCard.css";
 
 interface ProductCardProps {
   product: Product;
-  addToCard: (selectedProduct: Product) => void;
+  addToCart: (selectedProduct: Product) => void;
 }
 
-function ProductCard({ product, addToCard }: ProductCardProps) {
+function ProductCard({ product, addToCart }: ProductCardProps) {
   return (
     <div className="ProductCard">
       <Link to={`/products/${product.id}`}>
@@ -18,10 +18,10 @@ function ProductCard({ product, addToCard }: ProductCardProps) {
       <div className="card-details">
         <p>${product.price}</p>
         <Button
-          disabled={product.inCart}
           text={product.inCart ? "ADDED" : "🛒"}
+          disabled={product.inCart}
           onBtnClick={() => {
-          
+            addToCart(product);
           }}
         />
       </div>

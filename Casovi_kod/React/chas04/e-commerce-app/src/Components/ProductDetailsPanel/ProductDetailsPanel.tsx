@@ -4,21 +4,29 @@ import "./ProductDetailsPanel.css";
 
 interface ProductDetailsPanel {
   product: Product;
+  addToCart: (selectedProduct: Product) => void;
 }
 
-function ProductDetailsPanel({ product }: ProductDetailsPanel) {
+function ProductDetailsPanel({ product, addToCart }: ProductDetailsPanel) {
   return (
     <div className="ProductDetailsPanel">
       <h3>{product.title}</h3>
       <div className="panel-content">
         <div>
-            <img src={product.image} alt={product.title} />
+          <img src={product.image} alt={product.title} />
         </div>
         <div className="panel-details">
+          <p>{product.description}</p>
+          <div className="panel-controls">
             <p>${product.price}</p>
-            <Button disabled={product.inCart} text={product.inCart ? "ADDED" : "🛒"} onBtnClick={() => {
-                console.log("Button added to cart")
-            }}/>
+            <Button
+              text={product.inCart ? "ADDED" : "🛒"}
+              disabled={product.inCart}
+              onBtnClick={() => {
+                addToCart(product);
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

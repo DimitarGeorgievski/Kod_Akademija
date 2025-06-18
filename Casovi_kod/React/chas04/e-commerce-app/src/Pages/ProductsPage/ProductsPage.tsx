@@ -1,21 +1,37 @@
+import { useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import SearchInput from "../../Components/SearchInput/SearchInput";
 import type { Product } from "../../models/product.model";
 import "./ProductsPage.css";
 
 interface ProductsPageProps {
-  product: Product[];
-  addToCard: (selectedProduct: Product) => void
+  products: Product[];
+  addToCart: (selectedProduct: Product) => void;
 }
 
-function ProductsPage({ product, addToCard }: ProductsPageProps) {
+function ProductsPage({ products, addToCart }: ProductsPageProps) {
+  const [filteredProducts, setFilteredProducts] = useState(products)
+  const onSearch = (value: string) => {
+    setFilteredProducts(products.filter(product => product.title.toLowerCase().includes(value)))
+  }
   return (
     <section className="page ProductsPage">
       <div className="page-heading">
         <h2>Products</h2>
       </div>
+      <div>
+        <div className="card-container">
+          <SearchInput onSearch={onSearch}/>
+        </div>
+      </div>
+      
       <div className="card-container">
-        {product.map((product) => (
-          <ProductCard addToCard={addToCard} key={product.id} product={product} />
+        {filteredProducts.map(product => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+          />
         ))}
       </div>
     </section>
