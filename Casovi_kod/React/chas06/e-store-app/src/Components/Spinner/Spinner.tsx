@@ -1,7 +1,9 @@
-import "./Spinner.css"
+import "./Spinner.css";
 
-function Spinner() {
-    return <div className="Spinner">
+export function Spinner() {
+  return (
+    <div className="Spinner">
+      <div className="lds-spinner">
         <div></div>
         <div></div>
         <div></div>
@@ -14,7 +16,7 @@ function Spinner() {
         <div></div>
         <div></div>
         <div></div>
+      </div>
     </div>
+  );
 }
-
-export default Spinner
