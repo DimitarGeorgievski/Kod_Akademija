@@ -4,6 +4,7 @@ import "./CartItem.css";
 import { QuantityPanel } from "../QuantityPanel/QuantityPanel";
 import { useAppDispatch } from "../../utils/hooks";
 import { removeFromCart } from "../../state/slices/products.slice";
+import { toast } from "react-toastify";
 
 interface CartItemProps {
   product: Product;
@@ -16,10 +17,11 @@ function CartItem({ product }: CartItemProps) {
     <li className="CartItem">
       <strong>{product.title}</strong>
       <span>
-        ${(product.price * product.quantity).toFixed(2)}
+        ${(Number(product.price) * product.quantity).toFixed(2)}
         <QuantityPanel product={product} />
         <Button
           onBtnClick={() => {
+            toast.success("Product added to card")
             dispatch(removeFromCart(product));
           }}
           style={{ marginLeft: "20px" }}

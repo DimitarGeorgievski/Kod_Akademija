@@ -1,19 +1,41 @@
 import type { Product } from "../../models/product.model";
 import productsJSON from "../../data/products.json";
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  type ActionReducerMapBuilder,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
+import { httpService } from "../../services/http.service";
 
 interface ProductsState {
   value: Product[];
+  isLoading: boolean;
 }
 
 const initialState: ProductsState = {
-  value: productsJSON.map(product => ({
+  isLoading: false,
+  value: productsJSON.map((product) => ({
     ...product,
     quantity: 0,
     inCart: false,
     price: product.price,
   })),
 };
+
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const { data } = await httpService.get("/products");
+    const products: Product[] = data.map((product: Product) => ({
+      ...product,
+      inCart: false,
+      quantity: 0,
+      price: Number(product.price),
+    }));
+    return products;
+  }
+);
 
 const productsSlice = createSlice({
   name: "products",
@@ -69,6 +91,34 @@ const productsSlice = createSlice({
       }
     },
   },
+  setupLocalStorageCart(
+    state,
+    { payload: cartProducts }: PayloadAction<Product[]>
+  ) {
+    cartProducts.forEach((cartProduct) => {
+      for (const product of state.value) {
+        if (cartProduct.id === product.id) {
+          product.inCart = cartProduct.inCart;
+          product.quantity = cartProduct.quantity;
+          break;
+        }
+      }
+    });
+  },
+  extraReducers: (builder: ActionReducerMapBuilder<ProductsState>) => {
+    builder.addCase(fetchProducts.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      state.value = action.payload;
+      state.isLoading = false;
+      console.log("success");
+    });
+    builder.addCase(fetchProducts.rejected, (state) => {
+      state.isLoading = false;
+      console.log("something went wrong");
+    });
+  },
 });
 
 export const {
@@ -77,6 +127,7 @@ export const {
   addProductQuantity,
   removeProductQuantity,
   resetCart,
+  setupLocalStorageCart,
 } = productsSlice.actions;
 
 export default productsSlice;

@@ -9,9 +9,33 @@ import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import ProductDetailsPage from "./Pages/ProductDetailsPage/ProductDetailsPage";
 import { CheckoutPage } from "./Pages/CheckoutPage/CheckoutPage";
 import { AddProductPage } from "./Pages/AddProductPage/AddProductPage";
+import { useAppDispatch, useAppSelector } from "./utils/hooks";
+import { useEffect } from "react";
+import { fetchProducts, setupLocalStorageCart } from "./state/slices/products.slice";
+import { ToastContainer } from "react-toastify";
+import { Spinner } from "./Components/Spinner/Spinner";
+import { loadCartFromLocalStorage } from "./services/data.service";
 
 function App() {
+  const dispatch = useAppDispatch()
+  const products = useAppSelector(state => state.products.value)
+  const isLoading = useAppSelector(state => state.products.isLoading)
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
+
+  useEffect(() => {
+    if(!products.length) return;
+    console.log("Use effects for products called", products);
+    const cartProducts = loadCartFromLocalStorage();
+    console.log("cart Products: ",cartProducts)
+    dispatch(setupLocalStorageCart(cartProducts))
+  }, [products])
+
   return (
+    <>
+    {isLoading && <Spinner/>}
+    <ToastContainer position="bottom-right"/>
     <div className="App">
       <Header />
       <main>
@@ -27,6 +51,7 @@ function App() {
       </main>
       <Footer />
     </div>
+    </>
   );
 }
 
