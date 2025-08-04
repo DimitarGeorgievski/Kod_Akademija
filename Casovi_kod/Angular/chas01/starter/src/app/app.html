@@ -1,0 +1,50 @@
+<header>
+  <h1>Starter Angualr App</h1>
+</header>
+<main>
+  <h2>Hello, {{ title }} from the year: {{ year }}</h2>
+  <h2>{{ year }}</h2>
+  <h4>{{ person.firstName }}</h4>
+  <h4>{{ person.lastName }}</h4>
+  <h4>{{ person.age }}</h4>
+  <h4>{{ person.country }}</h4>
+  <div>
+    <h2>Property Binding</h2>
+    <h3
+      [style]="{ color: 'red', backgroundColor }"
+      [innerHTML]="
+        title + 'this is an extention of the title in the inner HtML'
+      "
+    >
+      Test
+    </h3>
+    <h3
+      [style]="{ color: 'red', backgroundColor }"
+      [innerHTML]="'I am normal text'"
+    ></h3>
+    <img src="imageSrc" alt="This is angular logo" />
+    <button [disabled]="isBtnDisabled">Not clickable button</button>
+  </div>
+  <div>
+    <h2>Conditional Rendering</h2>
+    @if(isHeadingShown) {
+    <h3>I should be hidden based on property in the class</h3>
+    } @else {
+    <h3>I am supposed to be shown if the heading is hidden</h3>
+    }
+    <ul>
+    @for (fruit of fruits; track $index) {
+        <li>{{fruit}}</li>
+    }
+    </ul>
+  </div>
+  <div>
+    <h2>Event Binding</h2>
+    <button (click)="printFullName('Petar', 'Blazevski')">Print Person's Full Name</button>
+    <h3>This is the course: {{course}}</h3>
+    <button (click)="onChangeCourse()">Change Course</button>
+    <input (keyup)="onInputChange($event)" type="text">
+    <p>Input Value: {{ inputValue}}</p>
+</div>
+  <app-parent/>
+</main>

@@ -1,0 +1,8 @@
+<div>
+  <p>parent works!</p>
+  <h4>Title From the Child: {{parentTitle}}</h4>
+  <app-child
+    [parentTitle]="parentTitle"
+    (titleOutput)="onTitleRecieve($event)"
+  />
+</div>
