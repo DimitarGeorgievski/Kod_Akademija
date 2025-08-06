@@ -1,0 +1,21 @@
+<div class="ticket-panel">
+  <div class="panel-controls">
+    <button class="control-btn" (click)="filterTicketByStatus(ticketStatus.NEW)">NEW</button>
+    <button class="control-btn" (click)="filterTicketByStatus(ticketStatus.IN_PROGRESS)">IN PROGRESS</button>
+    <button class="control-btn" (click)="filterTicketByStatus(ticketStatus.DONE)">DONE</button>
+    <button class="control-btn" (click)="filteredTickets.set(ticketList())">RESET</button>
+  </div>
+  <div class="panel-container">
+    <div class="ticket-list">
+      @for (ticket of filteredTickets(); track ticket.id) {
+        <app-ticket-box
+          [ticket]="ticket"
+          (ticketOutput)="onTicketSelect($event)"
+        />
+      }
+    </div>
+    @if (isDetailsShown()) {
+      <app-ticket-details [selectedTicket]="selectedTicket()" (hideOutput)="isDetailsShown.set(false)"/>
+    }
+  </div>
+</div>
