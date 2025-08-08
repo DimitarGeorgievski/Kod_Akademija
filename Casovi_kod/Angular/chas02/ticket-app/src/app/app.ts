@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Ticket, TicketStatus } from './models/ticket.model';
 import { TicketPanel } from './Components/ticket-panel/ticket-panel';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [TicketPanel],
+  imports: [TicketPanel, NgStyle],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -49,4 +50,10 @@ export class App {
       status: TicketStatus.DONE,
     },
   ];
+  randomColor = signal<string>('')
+  generateRandomColor() {
+    const randomColorText  = Math.floor(Math.random() * 16777215).toString(16);
+    this.randomColor.set(`#${randomColorText}`)
+    console.log(randomColorText)
+  }
 }
