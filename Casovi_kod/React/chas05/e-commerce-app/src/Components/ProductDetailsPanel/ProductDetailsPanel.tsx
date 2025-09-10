@@ -9,7 +9,8 @@ interface ProductDetailsPanel {
 }
 
 function ProductDetailsPanel({ product }: ProductDetailsPanel) {
-  const {addToCart} = useContext(ProductsContext)
+  const { addToCart } = useContext(ProductsContext);
+
   return (
     <div className="ProductDetailsPanel">
       <h3>{product.title}</h3>

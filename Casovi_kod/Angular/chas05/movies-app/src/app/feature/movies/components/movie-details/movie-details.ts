@@ -15,7 +15,7 @@ export class MovieDetails {
   selectedMovie = this.movieService.selectedMovie;
   ngOnInit(){
     const movieId: string = (this.route.snapshot.params['id']);
-    this.movieService.getMovieById(movieId)
+    this.movieService.geMovieById(movieId)
   }
   onClickLikeDislike(type: "LIKE" | "DISLIKE"){
     this.movieService.addLikeDislike(type);

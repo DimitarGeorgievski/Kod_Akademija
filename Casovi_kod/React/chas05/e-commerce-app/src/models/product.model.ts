@@ -6,5 +6,5 @@ export interface Product {
   category: string;
   image: string;
   rating: { rate: number; count: number };
-  inCart: boolean
+  inCart: boolean;
 }

@@ -28,7 +28,7 @@ export const routes: Routes = [
     component: AddMovie,
   },
   {
-    path: "**",
-    component: NotFound
-  }
+    path: '**', // so dve zvezdi da se prikazi na site ruti koi ne se sovpagjat so drugite path
+    component: NotFound,
+  },
 ];

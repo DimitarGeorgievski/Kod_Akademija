@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import type { Product } from "../../models/product.model";
 import Button from "../Button/Button";
 import "./CartItem.css";
+import { ProductsContext } from "../../Contexts/ProductContext";
 
 interface CartItemProps {
   product: Product;
-  removeFromCart: (selectedProduct: Product) => void;
 }
 
-function CartItem({ product, removeFromCart }: CartItemProps) {
+function CartItem({ product }: CartItemProps) {
+  const { removeFromCart } = useContext(ProductsContext);
+
   return (
     <li className="CartItem">
       <strong>{product.title}</strong>

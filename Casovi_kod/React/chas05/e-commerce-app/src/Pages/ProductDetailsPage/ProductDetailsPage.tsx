@@ -1,18 +1,14 @@
 import { Navigate, useParams } from "react-router-dom";
-import type { Product } from "../../models/product.model";
 import ProductDetailsPanel from "../../Components/ProductDetailsPanel/ProductDetailsPanel";
 import { useContext } from "react";
 import { ProductsContext } from "../../Contexts/ProductContext";
 
-interface ProductDetailsPageProps {
-  products: Product[];
-}
+function ProductDetailsPage() {
+  const { products } = useContext(ProductsContext);
 
-function ProductDetailsPage({ products }: ProductDetailsPageProps) {
-  const { addToCart } = useContext(ProductsContext);
   const { id } = useParams();
 
-  const foundProduct = products.find((product) => product.id === Number(id));
+  const foundProduct = products.find(product => product.id === Number(id));
 
   return (
     <section className="page">
@@ -21,7 +17,7 @@ function ProductDetailsPage({ products }: ProductDetailsPageProps) {
       </div>
       <div className="page-content">
         {foundProduct ? (
-          <ProductDetailsPanel product={foundProduct} addToCart={addToCart} />
+          <ProductDetailsPanel product={foundProduct} />
         ) : (
           <Navigate to="/not-found" />
         )}

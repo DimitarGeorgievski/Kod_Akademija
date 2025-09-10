@@ -1,4 +1,5 @@
-import type { NavLink } from "../../models/core.model";
+
+import type { NavLink } from "../../models/code.model";
 import "./Navbar.css";
 
 interface NavbarProps {

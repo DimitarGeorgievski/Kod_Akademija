@@ -1,23 +1,19 @@
-import type { Product } from "../../models/product.model";
+import { useContext } from "react";
 import CartItem from "../CartItem/CartItem";
 import "./CartList.css";
+import { ProductsContext } from "../../Contexts/ProductContext";
 
-interface CartListProps {
-  cartProducts: Product[];
-  removeFromCart: (selectedProduct: Product) => void;
-}
+function CartList() {
+  const { getProductsInCart } = useContext(ProductsContext);
 
-function CartList({ cartProducts, removeFromCart }: CartListProps) {
+  const cartProducts = getProductsInCart();
+
   return (
     <>
       {cartProducts.length > 0 ? (
         <ol className="CartList">
           {cartProducts.map((product) => (
-            <CartItem
-              key={product.id}
-              product={product}
-              removeFromCart={removeFromCart}
-            />
+            <CartItem key={product.id} product={product} />
           ))}
         </ol>
       ) : (

@@ -9,8 +9,10 @@ interface ProductCardProps {
   product: Product;
 }
 
-function ProductCard({ product, }: ProductCardProps) {
-  const {addToCart} = useContext(ProductsContext)
+function ProductCard({ product }: ProductCardProps) {
+  console.log("product card rerendered");
+  const { addToCart } = useContext(ProductsContext);
+
   return (
     <div className="ProductCard">
       <Link to={`/products/${product.id}`}>
